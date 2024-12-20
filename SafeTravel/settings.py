@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-      'rest_framework_simplejwt',
+    'rest_framework_simplejwt',
     'rest_framework',
-    'authentication'
+    'authentication',
+    'googleapi',
 ]
 
 MIDDLEWARE = [
@@ -158,7 +159,14 @@ SIMPLE_JWT = {
 
 STATIC_URL = 'static/'
 
+GOOGLE_API_KEY = "AIzaSyD7k6Tv835eNuGb_D0xDseGuaU6_zTXrYo"
+
+# GOOGLE="AIzaSyD7k6Tv835eNuGb_D0xDseGuaU6_zTXrYo"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+BASE_COUNTRY = "UK"
