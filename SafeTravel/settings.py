@@ -170,3 +170,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 BASE_COUNTRY = "UK"
+
+# settings.py
+
+# Session configuration (if necessary)
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Or another backend
+SESSION_COOKIE_NAME = 'your_session_cookie_name'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+ 
