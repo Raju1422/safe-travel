@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'googleapi',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SafeTravel.wsgi.application'
+ASGI_APPLICATION = "SafeTravel.asgi.application"
 
 
 # Database
