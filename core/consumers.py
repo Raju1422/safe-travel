@@ -3,10 +3,10 @@ import pandas as pd
 import pickle
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.auth import get_user_model
-with open('D:\\django\\SafeTravel\\safe-travel\\core\\scaler_kmeans.pkl', 'rb') as file:
+with open('C:\Gangadhar\DJANGO\safe-travel\core\scaler_kmeans.pkl', 'rb') as file:
     loaded_objects = pickle.load(file)
 
-with open('D:\\django\\SafeTravel\\safe-travel\\core\\cluster.json', 'r') as file:
+with open('C:\Gangadhar\DJANGO\safe-travel\core\cluster.json', 'r') as file:
     risk_data = json.load(file)
 
 scaler = loaded_objects['scaler']
