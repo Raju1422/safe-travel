@@ -1,10 +1,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserRegistrationSerializer,LoginSerializer
+from .serializers import UserRegistrationSerializer,LoginSerializer,UserDetailsSerializer
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
+from django.conf import settings
+from django.core.mail import send_mail
+
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -48,3 +52,33 @@ class LoginView(APIView):
     
       except Exception as e:
           return Response({"error":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+      
+
+class UserDetailsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserDetailsSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+   
+class SendEmailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        subject = "SOS Alert - User Details"
+        message = f"""
+        Username: {user.username}
+        Email: {user.email}
+        Age: {user.age}
+        Phone: {user.phone_number}
+        Address: {user.address}
+        Relatives' Numbers: {", ".join(user.relatives_phone_numbers or [])}
+        """
+        recipient = "munurigangadhar0987@gmail.com"
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient])
+            return Response({"message": "SOS email sent successfully!"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -180,4 +180,15 @@ BASE_COUNTRY = "UK"
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Or another backend
 SESSION_COOKIE_NAME = 'your_session_cookie_name'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'gangadharmunuri3007@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gangadharmunuri3007@gmail.com'
+EMAIL_HOST_PASSWORD = 'yzpm jxrb dzyz kxel'
+
  

@@ -45,3 +45,9 @@ class LoginSerializer(serializers.Serializer):
             raise serializers.ValidationError("Password should required for login")
         
         return attrs
+    
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser  
+        fields = ['id', 'username', 'email', 'age', 'phone_number', 'address', 'relatives_phone_numbers']
