@@ -76,9 +76,16 @@ class SendEmailView(APIView):
         Address: {user.address}
         Relatives' Numbers: {", ".join(user.relatives_phone_numbers or [])}
         """
-        recipient = "munurigangadhar0987@gmail.com"
+        recipients = request.data.get("recipients", [])
+        
+        # Ensure the recipients is a list and not empty
+        if not isinstance(recipients, list) or not recipients:
+            return Response({"error": "Recipients must be a non-empty list."}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [recipient])
+            # Send the email to the list of recipients
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, recipients)
             return Response({"message": "SOS email sent successfully!"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
